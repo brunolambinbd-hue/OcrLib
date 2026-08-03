@@ -1,0 +1,38 @@
+package com.example.ocr
+
+import com.example.imagecomparison.CoveredRequirement
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+/**
+ * Unit tests for [WordFilter] to reach 100% coverage.
+ */
+class WordFilterTest {
+
+    @Test
+    @CoveredRequirement("2.3.2.9")
+    fun testFilterWords_FilteringRules() {
+        val input = "Spirou 12345 and Fantasio"
+        val result = WordFilter.filterWords(input)
+        assertTrue(result.contains("spirou"))
+        assertTrue(result.contains("fantasio"))
+        assertTrue("Numeric strings should be filtered out", !result.contains("12345"))
+        assertTrue("Short words should be filtered out", !result.contains("and"))
+    }
+
+    @Test
+    @CoveredRequirement("2.3.2.9")
+    fun testFilterWords_EdgeCases() {
+        assertTrue("Null input should return empty list", WordFilter.filterWords(null).isEmpty())
+        assertTrue("Empty input should return empty list", WordFilter.filterWords("").isEmpty())
+        assertTrue("Blank input should return empty list", WordFilter.filterWords("   ").isEmpty())
+    }
+
+    @Test
+    @CoveredRequirement("2.3.2.9")
+    fun testFilterWords_NumericAndSpecialChars() {
+        val input = "!!! 123 4567 89 !!!"
+        val result = WordFilter.filterWords(input)
+        assertTrue("Should be empty for only short or numeric tokens", result.isEmpty())
+    }
+}

@@ -16,20 +16,20 @@ import kotlinx.coroutines.withContext
 /**
  * Interface defining the contract for text recognition services.
  */
-interface ITextRecognizer {
+public interface ITextRecognizer {
     /**
      * Extracts text from a bitmap.
      *
      * @param bitmap The image to process.
      * @return A list of extracted words.
      */
-    suspend fun extractText(bitmap: Bitmap): List<String>
+    public suspend fun extractText(bitmap: Bitmap): List<String>
 }
 
 /**
  * Interface for ML Kit interactions to allow mocking in tests.
  */
-interface IMlKitWrapper {
+public interface IMlKitWrapper {
     /**
      * Processes a bitmap using the provided TextRecognizer.
      *
@@ -37,7 +37,7 @@ interface IMlKitWrapper {
      * @param bitmap The image to analyze.
      * @return A Task containing the extracted text.
      */
-    fun processImage(
+    public fun processImage(
         recognizer: TextRecognizer,
         bitmap: Bitmap,
     ): Task<Text>
@@ -47,7 +47,7 @@ interface IMlKitWrapper {
  * Utility to recognize text from a Bitmap using Google ML Kit.
  */
 @SatisfiesRequirement("2.3.1.2")
-object TextRecognitionHelper : ITextRecognizer {
+public object TextRecognitionHelper : ITextRecognizer {
     private const val TAG = "TextRecognitionHelper"
 
     /** The actual ML Kit recognizer instance. Can be swapped in tests. */
@@ -84,12 +84,19 @@ object TextRecognitionHelper : ITextRecognizer {
 
     /**
      * Extracts text from a bitmap using the default OCR dispatcher.
+     *
+     * @param bitmap The image to process.
+     * @return A list of extracted words.
      */
     @SatisfiesRequirement("2.3.1.2")
-    override suspend fun extractText(bitmap: Bitmap): List<String> = extractText(bitmap, ocrDispatcher)
+    public override suspend fun extractText(bitmap: Bitmap): List<String> = extractText(bitmap, ocrDispatcher)
 
     /**
      * Internal implementation of text extraction with custom dispatcher support.
+     *
+     * @param bitmap The image to analyze.
+     * @param dispatcher The coroutine dispatcher to use.
+     * @return A list of filtered words.
      */
     @SatisfiesRequirement("2.3.1.2")
     private suspend fun extractText(
@@ -114,20 +121,6 @@ object TextRecognitionHelper : ITextRecognizer {
             }
         }
 
-    /**
-     * Filters and cleans a string into a list of significant words.
-     *
-     * Requirement 2.3.2: Removes words with 3 or fewer characters and pure numeric strings.
-     */
     @SatisfiesRequirement("2.3.2.2")
-    fun filterWords(rawText: String?): List<String> {
-        if (rawText.isNullOrBlank()) return emptyList()
-
-        return rawText
-            .split("[^\\p{L}\\p{N}]+".toRegex())
-            .map { it.trim().lowercase(java.util.Locale.ROOT) }
-            .filter { cleanWord ->
-                cleanWord.length > 3 && !cleanWord.all { it.isDigit() }
-            }
-    }
+    public fun filterWords(rawText: String?): List<String> = WordFilter.filterWords(rawText)
 }
