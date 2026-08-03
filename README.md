@@ -1,28 +1,20 @@
 # OcrLib
 
-A standalone Android library for text recognition using Google ML Kit.
+## Description
+Bibliothèque d'extraction de texte (OCR) basée sur Google ML Kit, optimisée pour la reconnaissance de titres et d'éditeurs sur des couvertures d'objets de collection.
 
-## Setup
+## Fonctionnalités
+- `TextRecognitionHelper` : Service asynchrone pour extraire des mots clés depuis un Bitmap.
+- Support multi-langue via ML Kit.
+- Intégration native de la traçabilité.
 
-Add the library to your `build.gradle.kts`:
-
+## Installation
+1. Publier localement : `./gradlew publishToMavenLocal`
+2. Ajoutez la dépendance :
 ```kotlin
-dependencies {
-    implementation("com.example.lib:ocr:1.0.0")
-}
+implementation("com.example.lib:ocr:1.0.0")
 ```
 
-Ensure you have `mavenLocal()` in your repositories if you are using a local build.
-
-## Usage
-
-```kotlin
-val recognizer: ITextRecognizer = TextRecognitionHelper
-val words = recognizer.extractText(bitmap)
-```
-
-## Features
-- ML Kit Text Recognition integration.
-- Coroutines support.
-- Built-in word filtering (removes small words and pure numeric strings).
-- Requirement traceability via annotations.
+## Dépendances
+- `TraceabilityLib`
+- `Google Play Services ML Kit Text Recognition`
