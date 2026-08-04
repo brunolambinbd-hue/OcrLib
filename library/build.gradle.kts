@@ -9,10 +9,6 @@ plugins {
     id("jacoco")
 }
 
-dependencyLocking {
-    lockAllConfigurations()
-}
-
 android {
     namespace = "com.example.ocr"
     compileSdk = libs.versions.sdkCompile.get().toString().toInt()
@@ -44,14 +40,6 @@ android {
     }
     publishing {
         singleVariant("release")
-    }
-}
-
-sonar {
-    properties {
-        val buildDir = project.layout.buildDirectory.get().asFile
-        property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
-        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
     }
 }
 
