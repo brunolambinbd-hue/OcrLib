@@ -115,7 +115,7 @@ public object TextRecognitionHelper : ITextRecognizer {
                 }
                 emptyList()
             } catch (
-                @Suppress("TooGenericExceptionCaught") e: Throwable,
+                @Suppress("TooGenericExceptionCaught") _: Throwable,
             ) {
                 emptyList()
             }

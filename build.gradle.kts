@@ -24,8 +24,13 @@ sonar {
         property("sonar.scm.provider", "git")
         property("sonar.gradle.skipCompile", "false")
         property("sonar.exclusions", "**/build/**,**/generated/**,**/.gradle/**")
+        property("sonar.inclusions", "library/gradle.lockfile,settings-gradle.lockfile,**/*.kt,**/*.kts")
         property("sonar.tests", "src/test/java,src/androidTest/java")
     }
 }
 
 apply(from = "sync-standards.gradle.kts")
+
+dependencyLocking {
+    lockAllConfigurations()
+}

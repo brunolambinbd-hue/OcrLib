@@ -9,6 +9,10 @@ plugins {
     id("jacoco")
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 android {
     namespace = "com.example.ocr"
     compileSdk = libs.versions.sdkCompile.get().toString().toInt()
