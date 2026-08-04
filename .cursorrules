@@ -89,14 +89,21 @@
 
 ## Explicit API Design
 - **Rule**: For all `public` and `protected` declarations (classes, functions, and properties), ALWAYS explicitly specify:
-    1. The visibility modifier (even if it is the default `public`).
-    2. The return type (never rely on type inference for public APIs).
+    i. The visibility modifier (even if it is the default `public`).
+    ii. The return type (never rely on type inference for public APIs).
+- **Suppressing Warnings**: Since explicit `public` is redundant in Kotlin, it will trigger an IDE and Sonar warning. To maintain a clean report while following this standard, ALWAYS add `@Suppress("RedundantVisibilityModifier")` at the top of the class or object.
 - **Example**:
   ```kotlin
-  public fun getItemCount(): Int = 10 // Correct
-  fun getItemCount() = 10 // Incorrect
+  // Correct
+  @Suppress("RedundantVisibilityModifier")
+  public class DataProcessor {
+      public fun getItemCount(): Int = 10
+  }
+
+  // Incorrect
+  fun getItemCount() = 10
   ```
-- **Reason**: This ensures API stability, prevents accidental exposure of internal types, and forces a conscious decision when changing signatures.
+- **Reason**: This ensures API stability and forces a conscious decision when changing signatures, while avoiding noise in quality reports.
 
 ## French Localization and Typography
 - **Rule**: For French user-facing strings (e.g., in `strings.xml`) and French documentation, ALWAYS follow standard French punctuation rules.
@@ -124,6 +131,7 @@
     - **Magic Numbers**: Do NOT use literal numbers in logic; use named constants.
     - **Resource Management**: Always use `.use {}` for Closeable resources (Streams, Cursors).
     - **Null Safety**: Avoid `!!` operator; use safe calls `?.` or explicit null checks.
+    - **Redundant Modifiers**: Do not remove `public` modifiers to fix Sonar warnings; use the class-level `@Suppress` mentioned in the API Design section instead.
     - **Logging**: NEVER use `System.out.print`. ALWAYS use `android.util.Log` and follow the **Logging Best Practices** (see below).
 
 ## Logging Best Practices

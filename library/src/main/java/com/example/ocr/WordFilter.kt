@@ -1,3 +1,4 @@
+@file:Suppress("RedundantVisibilityModifier")
 package com.example.ocr
 
 import com.example.imagecomparison.SatisfiesRequirement

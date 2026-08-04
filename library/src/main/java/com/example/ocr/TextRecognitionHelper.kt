@@ -1,3 +1,4 @@
+@file:Suppress("RedundantVisibilityModifier")
 package com.example.ocr
 
 import android.graphics.Bitmap
@@ -106,7 +107,7 @@ public object TextRecognitionHelper : ITextRecognizer {
         withContext(dispatcher) {
             try {
                 val result = mlKitWrapper.processImage(recognizer, bitmap).await()
-                if (result?.text.isNullOrBlank()) return@withContext emptyList()
+                if (result.text.isBlank()) return@withContext emptyList()
 
                 filterWords(result.text)
             } catch (e: Exception) {
