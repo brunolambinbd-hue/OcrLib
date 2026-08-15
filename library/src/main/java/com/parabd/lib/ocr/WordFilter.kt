@@ -1,7 +1,7 @@
 @file:Suppress("RedundantVisibilityModifier")
-package com.example.ocr
+package com.parabd.lib.ocr
 
-import com.example.imagecomparison.SatisfiesRequirement
+import com.parabd.lib.traceability.SatisfiesRequirement
 import java.util.Locale
 
 /**
@@ -29,3 +29,6 @@ public object WordFilter {
             }
     }
 }
+
+
+

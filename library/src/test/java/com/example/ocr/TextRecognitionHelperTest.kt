@@ -1,7 +1,7 @@
-package com.example.ocr
+package com.parabd.lib.ocr
 
 import android.graphics.Bitmap
-import com.example.imagecomparison.CoveredRequirement
+import com.parabd.lib.traceability.CoveredRequirement
 import com.google.android.gms.tasks.Tasks
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
@@ -173,3 +173,6 @@ class TextRecognitionHelperTest : BaseOcrTest() {
         assertEquals(mockRecognizer, originalFactory.invoke())
     }
 }
+
+
+

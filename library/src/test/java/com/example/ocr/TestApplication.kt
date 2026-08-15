@@ -1,5 +1,6 @@
-package com.example.ocr
+package com.parabd.lib.ocr
 
 import android.app.Application
 
 class TestApplication : Application()
+

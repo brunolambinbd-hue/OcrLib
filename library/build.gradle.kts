@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ocr"
+    namespace = "com.parabd.lib.ocr"
     compileSdk = libs.versions.sdkCompile.get().toString().toInt()
 
     defaultConfig {
@@ -139,10 +139,21 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.example.lib"
+                groupId = "com.parabd.lib"
                 artifactId = "ocr"
                 version = "1.0.0"
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+

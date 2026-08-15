@@ -2,35 +2,64 @@ import java.net.URL
 import java.io.File
 
 /**
- * Tâche Gradle pour synchroniser les règles Cursor (.cursorrules) depuis le dépôt central GitHub.
- * S'exécute automatiquement lors de la synchronisation Gradle ou peut être lancée manuellement.
+ * Tâche Gradle v3 pour synchroniser l'INTÉGRALITÉ de la documentation partagée depuis GitHub.
+ * Utilise shared-files.txt comme index pour découvrir les nouveaux fichiers.
  */
-tasks.register("syncCursorRules") {
+tasks.register("syncProjectStandards") {
     group = "Verification"
-    description = "Synchronise le fichier .cursorrules avec la version de référence sur GitHub."
+    description = "Synchronise dynamiquement tous les standards et documents depuis GitHub."
 
     doLast {
-        val remoteUrl = "https://raw.githubusercontent.com/brunolambinbd-hue/ProjectStandards/main/.cursorrules"
-        val localFile = File(project.projectDir, ".cursorrules")
+        val baseUrl = "https://raw.githubusercontent.com/brunolambinbd-hue/ProjectStandards/main"
+        val manifestUrl = "$baseUrl/shared-files.txt"
 
-        println("📡 Vérification des standards depuis : $remoteUrl")
+        println("📡 Récupération de l'index des fichiers : $manifestUrl")
 
         try {
-            val remoteContent = URL(remoteUrl).readText()
+            // 1. Toujours synchroniser le .cursorrules (à la racine)
+            syncFile("$baseUrl/.cursorrules", ".cursorrules")
 
-            if (!localFile.exists() || localFile.readText() != remoteContent) {
-                localFile.writeText(remoteContent)
-                println("✅ Fichier .cursorrules mis à jour avec succès.")
-            } else {
-                println("👍 Le fichier .cursorrules est déjà à jour.")
+            // 2. Récupérer la liste des documents
+            val manifestContent = URL(manifestUrl).readText()
+            val filesToSync = manifestContent.lines().filter { it.isNotBlank() }
+
+            println("📂 ${filesToSync.size} fichiers détectés dans la documentation.")
+
+            // 3. Synchroniser chaque fichier de la liste
+            filesToSync.forEach { relativePath ->
+                val remoteUrl = "$baseUrl/$relativePath"
+                // On s'assure que le chemin local est correct (docs/shared/...)
+                val localPath = relativePath.replace("docs/", "docs/shared/")
+                syncFile(remoteUrl, localPath)
             }
         } catch (e: Exception) {
-            println("⚠️ Impossible de synchroniser .cursorrules (vérifiez votre connexion ou l'URL) : ${e.message}")
+            println("⚠️ Erreur lors de la synchronisation globale : ${e.message}")
         }
     }
 }
 
-// Lancer la synchro automatiquement lors de la synchronisation du projet (via la tâche help)
-rootProject.tasks.named("help") {
-    dependsOn("syncCursorRules")
+/**
+ * Télécharge un fichier si distant différent du local.
+ */
+fun syncFile(remoteUrl: String, localPath: String) {
+    val projectDir = project.projectDir // Accès sécurisé au dossier projet
+    val localFile = File(projectDir, localPath)
+
+    try {
+        val remoteContent = URL(remoteUrl).readText()
+        if (!localFile.exists() || localFile.readText() != remoteContent) {
+            localFile.parentFile.mkdirs()
+            localFile.writeText(remoteContent)
+            println("✅ Mis à jour : $localPath")
+        } else {
+            // println("👍 Déjà à jour : $localPath")
+        }
+    } catch (e: Exception) {
+        println("❌ Échec sur $localPath : ${e.message}")
+    }
+}
+
+// Lancement automatique au moment du Gradle Sync (via l'IDE)
+tasks.named("help") {
+    dependsOn("syncProjectStandards")
 }

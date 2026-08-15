@@ -1,4 +1,4 @@
-package com.example.ocr
+package com.parabd.lib.ocr
 
 import android.util.Log
 import io.mockk.every
@@ -27,3 +27,4 @@ abstract class BaseOcrTest {
         unmockkAll()
     }
 }
+

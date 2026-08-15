@@ -1,6 +1,6 @@
-package com.example.ocr
+package com.parabd.lib.ocr
 
-import com.example.imagecomparison.CoveredRequirement
+import com.parabd.lib.traceability.CoveredRequirement
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -36,3 +36,6 @@ class WordFilterTest {
         assertTrue("Should be empty for only short or numeric tokens", result.isEmpty())
     }
 }
+
+
+

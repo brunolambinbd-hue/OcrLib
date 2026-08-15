@@ -35,7 +35,7 @@ play-services-mlkit-text-recognition = { group = "com.google.android.gms", name 
 play-services-tasks = { group = "com.google.android.gms", name = "play-services-tasks", version.ref = "playServicesTasks" }
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
-traceability = { group = "com.example.lib", name = "traceability", version = "1.0.0" }
+traceability = { group = "com.parabd.lib", name = "traceability", version = "1.0.0" }
 
 # Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -54,3 +54,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonar" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+
