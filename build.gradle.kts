@@ -37,6 +37,7 @@ sonarqube {
         sonarToken?.let { property("sonar.token", it) }
 
         property("sonar.projectVersion", "1.0.0")
+        property("sonar.branch.name", "main")
         property("sonar.language", "kotlin")
         property("sonar.kotlin.version", libs.versions.kotlin.get())
 
