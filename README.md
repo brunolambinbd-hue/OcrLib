@@ -1,20 +1,29 @@
 # OcrLib
 
-## Description
-Bibliothèque d'extraction de texte (OCR) basée sur Google ML Kit, optimisée pour la reconnaissance de titres et d'éditeurs sur des couvertures d'objets de collection.
+## Overview
+`OcrLib` is an Android library providing Optical Character Recognition (OCR) capabilities powered by **Google ML Kit Text Recognition**. It is designed for efficient text extraction from bitmaps (such as book or collectible covers) and includes advanced text filtering and strict requirements traceability.
 
-## Fonctionnalités
-- `TextRecognitionHelper` : Service asynchrone pour extraire des mots clés depuis un Bitmap.
-- Support multi-langue via ML Kit.
-- Intégration native de la traçabilité.
+## Key Features
+- **Asynchronous OCR (`Req 2.3.1.2`):** Built with Kotlin Coroutines (`extractText(Bitmap)`) using Google ML Kit.
+- **Smart Word Filtering (`Req 2.3.2.2`):** Automatically filters out short words ($\le$ 3 characters) and pure numeric tokens via `WordFilter`.
+- **Traceability Integration:** Fully annotated with `@SatisfiesRequirement` matching specifications in [REQUIREMENTS.md](REQUIREMENTS.md).
+- **Testable Architecture:** Modular interfaces (`ITextRecognizer`, `IMlKitWrapper`) enabling robust unit and Robolectric testing.
 
 ## Installation
-1. Publier localement : `./gradlew publishToMavenLocal`
-2. Ajoutez la dépendance :
+1. Publish locally to Maven:
+   ```bash
+   ./gradlew publishToMavenLocal
+   ```
+2. Add the dependency in your `build.gradle.kts`:
+   ```kotlin
+   implementation("com.parabd.lib:ocr:1.0.0")
+   ```
+
+## Usage Example
 ```kotlin
-implementation("com.example.lib:ocr:1.0.0")
+val bitmap: Bitmap = ... // Your image bitmap
+val words: List<String> = TextRecognitionHelper.extractText(bitmap)
 ```
 
-## Dépendances
-- `TraceabilityLib`
-- `Google Play Services ML Kit Text Recognition`
+## Requirements Traceability
+For a detailed mapping of functional requirements implemented in this library, please refer to [REQUIREMENTS.md](REQUIREMENTS.md).

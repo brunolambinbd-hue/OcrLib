@@ -1,4 +1,5 @@
 @file:Suppress("RedundantVisibilityModifier")
+
 package com.parabd.lib.ocr
 
 import com.parabd.lib.traceability.SatisfiesRequirement
@@ -8,7 +9,6 @@ import java.util.Locale
  * Utility for filtering and cleaning words from raw text.
  */
 public object WordFilter {
-
     /**
      * Filters and cleans a string into a list of significant words.
      *
@@ -29,6 +29,3 @@ public object WordFilter {
             }
     }
 }
-
-
-

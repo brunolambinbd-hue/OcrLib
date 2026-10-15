@@ -78,17 +78,23 @@ tasks.register<JacocoReport>("testDebugUnitTestReport") {
         html.required.set(true)
     }
 
-    val fileFilter = listOf(
-        "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*",
-        "**/*Test*.*", "android/**/*.*"
-    )
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+            "android/**/*.*",
+        )
 
     val buildDir = layout.buildDirectory.asFile.get()
 
     // Configuration simplifiée pour AGP 8.8
-    val classTree = fileTree("$buildDir/tmp/kotlin-classes/debug") {
-        exclude(fileFilter)
-    }
+    val classTree =
+        fileTree("$buildDir/tmp/kotlin-classes/debug") {
+            exclude(fileFilter)
+        }
 
     sourceDirectories.setFrom(files("$projectDir/src/main/java"))
     classDirectories.setFrom(files(classTree))
@@ -96,7 +102,7 @@ tasks.register<JacocoReport>("testDebugUnitTestReport") {
     executionData.setFrom(
         fileTree(buildDir) {
             include("outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec")
-        }
+        },
     )
 }
 
@@ -146,14 +152,3 @@ afterEvaluate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

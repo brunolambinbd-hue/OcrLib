@@ -67,8 +67,8 @@ subprojects {
     sonarqube {
         properties {
             val buildDir = project.layout.buildDirectory.get().asFile
-            // Chaque module indexe son code et son lockfile local
-            property("sonar.sources", "src/main/java, gradle.lockfile")
+            // Chaque module indexe son code
+            property("sonar.sources", "src/main/java")
             property("sonar.tests", "src/test/java")
             property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
             property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")

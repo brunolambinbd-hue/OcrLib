@@ -1,15 +1,16 @@
 @file:Suppress("RedundantVisibilityModifier")
+
 package com.parabd.lib.ocr
 
 import android.graphics.Bitmap
 import android.util.Log
-import com.parabd.lib.traceability.SatisfiesRequirement
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import com.parabd.lib.traceability.SatisfiesRequirement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -125,6 +126,3 @@ public object TextRecognitionHelper : ITextRecognizer {
     @SatisfiesRequirement("2.3.2.2")
     public fun filterWords(rawText: String?): List<String> = WordFilter.filterWords(rawText)
 }
-
-
-

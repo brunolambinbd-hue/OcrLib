@@ -11,7 +11,6 @@ import org.junit.Before
  * Base class for OCR tests providing common mocks for Android system classes.
  */
 abstract class BaseOcrTest {
-
     @Before
     open fun setUp() {
         mockkStatic(Log::class)
@@ -27,4 +26,3 @@ abstract class BaseOcrTest {
         unmockkAll()
     }
 }
-
