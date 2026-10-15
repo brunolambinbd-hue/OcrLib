@@ -150,5 +150,15 @@ afterEvaluate {
                 version = "1.0.0"
             }
         }
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/brunolambinbd-hue/OcrLib")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR") ?: ""
+                    password = System.getenv("GITHUB_TOKEN") ?: ""
+                }
+            }
+        }
     }
 }
