@@ -198,5 +198,6 @@ sonarqube {
         val buildDir = layout.buildDirectory.get().asFile
         property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
         property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
+        property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
     }
 }
