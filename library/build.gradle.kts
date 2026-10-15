@@ -1,4 +1,5 @@
 import org.gradle.testing.jacoco.plugins.JacocoTaskExtension
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.library)
@@ -160,5 +161,42 @@ afterEvaluate {
                 }
             }
         }
+    }
+}
+
+// Configuration SonarCloud pour le module library
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { localProperties.load(it) }
+}
+val sonarToken: String? = localProperties.getProperty("sonar.token")
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "brunolambinbd-hue_OcrLib")
+        property("sonar.organization", "brunolambinbd-hue")
+        property("sonar.host.url", "https://sonarcloud.io")
+        sonarToken?.let { property("sonar.token", it) }
+
+        property("sonar.projectVersion", "1.0.0")
+        property("sonar.branch.name", "main")
+        property("sonar.language", "kotlin")
+        property("sonar.kotlin.version", libs.versions.kotlin.get())
+
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.scm.provider", "git")
+        property("sonar.gradle.skipCompile", "false")
+
+        property(
+            "sonar.exclusions",
+            "**/build/**, **/generated/**, **/.gradle/**, **/*Binding.java, **/*_Impl.java, **/R.java, **/BuildConfig.java",
+        )
+
+        property("sonar.sources", "src/main/java")
+        property("sonar.tests", "src/test/java")
+        val buildDir = layout.buildDirectory.get().asFile
+        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
+        property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
     }
 }
