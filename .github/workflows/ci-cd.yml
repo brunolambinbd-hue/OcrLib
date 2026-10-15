@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-test:
-    name: Build, Test & Lint
+    name: Build, Test & Lint & Sonar
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,12 @@ jobs:
 
       - name: Run Ktlint Check
         run: ./gradlew ktlintCheck
+
+      - name: Run SonarQube Analysis
+        run: ./gradlew sonarqube --info
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   publish:
     name: Publish Package & Release
@@ -62,7 +68,7 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create GitHub Release
+      - name: Create GitHub Report / Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
