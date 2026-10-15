@@ -37,6 +37,11 @@ android {
     testOptions {
         unitTests.isIncludeAndroidResources = true
     }
+    lint {
+        abortOnError = false
+        xmlReport = true
+        htmlReport = true
+    }
     publishing {
         singleVariant("release")
     }

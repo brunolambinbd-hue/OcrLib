@@ -54,23 +54,32 @@ sonarqube {
     }
 }
 
-project(":library") {
-    apply(plugin = "org.sonarqube")
-    sonarqube {
-        properties {
-            property("sonar.sources", "src/main/java")
-            property("sonar.tests", "src/test/java")
-            val buildDir = project.layout.buildDirectory.get().asFile
-            property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
-            property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
-            property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
-        }
+tasks.register("runSonarAnalysis") {
+    group = "Reporting"
+    description = "Exécute les tests (Couverture), le Lint et télécharge le rapport vers SonarCloud."
+    dependsOn(":library:testDebugUnitTestReport")
+    dependsOn(":library:lintDebug")
+    finalizedBy("sonar")
+    doLast {
+        println("\n🚀 CYCLE SONAR : Rapports générés. Lancement de l'upload vers SonarCloud...")
     }
 }
 
 subprojects {
     dependencyLocking {
         lockAllConfigurations()
+    }
+    apply(plugin = "org.sonarqube")
+    sonarqube {
+        properties {
+            val buildDir = project.layout.buildDirectory.get().asFile
+            // Chaque module indexe son code et ses rapports
+            property("sonar.sources", "src/main/java")
+            property("sonar.tests", "src/test/java")
+            property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/testDebugUnitTestReport/testDebugUnitTestReport.xml")
+            property("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
+            property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
+        }
     }
 }
 
