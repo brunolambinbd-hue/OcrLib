@@ -149,12 +149,6 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
             every { mockWrapper.processImage(any(), any()) } throws RuntimeException("OCR Error")
             TextRecognitionHelper.mlKitWrapper = mockWrapper
 
-            // Test with Log.isLoggable = true
-            every { android.util.Log.isLoggable(any(), android.util.Log.ERROR) } returns true
-            assertTrue(TextRecognitionHelper.extractText(bitmap).isEmpty())
-
-            // Test with Log.isLoggable = false
-            every { android.util.Log.isLoggable(any(), android.util.Log.ERROR) } returns false
             assertTrue(TextRecognitionHelper.extractText(bitmap).isEmpty())
         }
 

@@ -3,7 +3,6 @@
 package com.parabd.lib.ocr
 
 import android.graphics.Bitmap
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
@@ -11,6 +10,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.parabd.lib.traceability.SatisfiesRequirement
+import com.parabd.lib.traceability.utils.LogManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -112,9 +112,7 @@ public object TextRecognitionHelper : ITextRecognizer {
 
                 filterWords(result.text)
             } catch (e: Exception) {
-                if (Log.isLoggable(TAG, Log.ERROR)) {
-                    Log.e(TAG, "Error during OCR process", e)
-                }
+                LogManager.e(TAG, "Error during OCR process", e)
                 emptyList()
             } catch (
                 @Suppress("TooGenericExceptionCaught") _: Throwable,
