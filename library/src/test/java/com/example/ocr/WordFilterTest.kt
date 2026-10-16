@@ -9,11 +9,12 @@ import org.junit.Test
  */
 @Suppress("RedundantVisibilityModifier")
 public class WordFilterTest {
+
     /**
      * Tests word filtering rules (removing short words and numeric strings).
      */
     @Test
-    @CoveredRequirement("2.3.2.2")
+    @CoveredRequirement("2.3.2.9.10")
     public fun testFilterWords_FilteringRules() {
         val input = "Spirou 12345 and Fantasio"
         val result = WordFilter.filterWords(input)
@@ -27,7 +28,7 @@ public class WordFilterTest {
      * Tests edge cases like null, empty, or blank input.
      */
     @Test
-    @CoveredRequirement("2.3.2.2")
+    @CoveredRequirement("2.3.2.9.10")
     public fun testFilterWords_EdgeCases() {
         assertTrue("Null input should return empty list", WordFilter.filterWords(null).isEmpty())
         assertTrue("Empty input should return empty list", WordFilter.filterWords("").isEmpty())
@@ -38,7 +39,7 @@ public class WordFilterTest {
      * Tests input with only numeric tokens and special characters.
      */
     @Test
-    @CoveredRequirement("2.3.2.2")
+    @CoveredRequirement("2.3.2.9.10")
     public fun testFilterWords_NumericAndSpecialChars() {
         val input = "!!! 123 4567 89 !!!"
         val result = WordFilter.filterWords(input)

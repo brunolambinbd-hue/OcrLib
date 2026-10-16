@@ -17,7 +17,7 @@ public object WordFilter {
      * @param rawText The raw text string to filter.
      * @return A list of significant lowercase words.
      */
-    @SatisfiesRequirement("2.3.2.2")
+    @SatisfiesRequirement("2.3.2.9")
     public fun filterWords(rawText: String?): List<String> {
         if (rawText.isNullOrBlank()) return emptyList()
 

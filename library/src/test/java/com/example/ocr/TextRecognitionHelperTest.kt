@@ -53,7 +53,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests that extractText returns filtered words correctly.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testExtractText_ReturnsFilteredWords(): Unit =
         runTest {
             TextRecognitionHelper.ocrDispatcher = kotlinx.coroutines.Dispatchers.Unconfined
@@ -75,7 +75,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests lazy initialization of the default recognizer.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testLazyInitializationOfDefaultRecognizer(): Unit =
         runTest {
             val mockDefaultRecognizer: TextRecognizer = mockk<TextRecognizer>(relaxed = true)
@@ -96,7 +96,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests default ML Kit wrapper coverage.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testDefaultMlKitWrapper_Coverage() {
         val bitmap: Bitmap = mockk<Bitmap>()
         val mockRecognizer: TextRecognizer = mockk<TextRecognizer>(relaxed = true)
@@ -113,7 +113,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests extractText with empty or blank results.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testExtractText_EmptyOrBlankResults(): Unit =
         runTest {
             TextRecognitionHelper.ocrDispatcher = kotlinx.coroutines.Dispatchers.Unconfined
@@ -140,7 +140,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests extractText exception handling.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testExtractText_HandlesException(): Unit =
         runTest {
             TextRecognitionHelper.ocrDispatcher = kotlinx.coroutines.Dispatchers.Unconfined
@@ -156,7 +156,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests extractText throwable handling.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testExtractText_HandlesThrowable(): Unit =
         runTest {
             TextRecognitionHelper.ocrDispatcher = kotlinx.coroutines.Dispatchers.Unconfined
@@ -173,7 +173,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests internal properties debug access.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testInternalProperties_DebugAccess() {
         val mockRecognizer: TextRecognizer = mockk<TextRecognizer>()
         TextRecognitionHelper.recognizerClient = mockRecognizer
@@ -187,7 +187,7 @@ public class TextRecognitionHelperTest : BaseOcrTest() {
      * Tests default client creation and factory.
      */
     @Test
-    @CoveredRequirement("2.3.1.2")
+    @CoveredRequirement("2.3.1.9.10")
     public fun testGetDefaultClient_And_Factory() {
         mockkStatic(TextRecognition::class)
         val mockRecognizer: TextRecognizer = mockk<TextRecognizer>()
