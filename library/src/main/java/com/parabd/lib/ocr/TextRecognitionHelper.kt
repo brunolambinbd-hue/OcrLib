@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 /**
  * Interface defining the contract for text recognition services.
  */
-public interface ITextRecognizer {
+public fun interface ITextRecognizer {
     /**
      * Extracts text from a bitmap.
      *
@@ -31,7 +31,7 @@ public interface ITextRecognizer {
 /**
  * Interface for ML Kit interactions to allow mocking in tests.
  */
-public interface IMlKitWrapper {
+public fun interface IMlKitWrapper {
     /**
      * Processes a bitmap using the provided TextRecognizer.
      *
