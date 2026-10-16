@@ -56,17 +56,11 @@ public object TextRecognitionHelper : ITextRecognizer {
     internal var recognizerClient: TextRecognizer? = null
 
     /** Wrapper for ML Kit calls. Can be swapped in tests. */
-    internal var mlKitWrapper: IMlKitWrapper =
-        object : IMlKitWrapper {
-            @SatisfiesRequirement("2.3.1.9")
-            override fun processImage(
-                recognizer: TextRecognizer,
-                bitmap: Bitmap,
-            ): Task<Text> {
-                val image = InputImage.fromBitmap(bitmap, 0)
-                return recognizer.process(image)
-            }
-        }
+    @SatisfiesRequirement("2.3.1.9")
+    internal var mlKitWrapper: IMlKitWrapper = IMlKitWrapper { recognizer, bitmap ->
+        val image = InputImage.fromBitmap(bitmap, 0)
+        recognizer.process(image)
+    }
 
     /** Factory for the default recognizer. */
     internal var recognizerFactory: () -> TextRecognizer = { getDefaultClient() }
