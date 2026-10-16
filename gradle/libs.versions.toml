@@ -5,6 +5,7 @@ sonar = "5.1.0.4882"
 ktlint = "12.1.1"
 jacoco = "0.8.15"
 mockk = "1.13.12"
+mockitoInline = "5.2.0"
 
 # SDK Versions
 sdkMin = "26"
@@ -41,6 +42,7 @@ traceability = { group = "com.parabd.lib", name = "traceability", version = "1.0
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockitoInline" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTesting" }
